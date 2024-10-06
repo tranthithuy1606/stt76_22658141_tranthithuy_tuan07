@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <style>
+        .error {
+            color: red;
+        }
+        table{
+            border: 2px solid black;
+            width: 600px;
+            background-color: rgba(201, 248, 131, 0.584);
+        }
+        td,th {
+      border: 1px solid #a19e9e;
+      padding: 8px;
+        }
+      label{
+        color: blue;
+        
+        }
+    </style>
+</head>
+<body>
+    
+    <table>
+        <tr>
+            <th colspan="2"><h2>Register Form</h2></th>
+        </tr>
+    <form id="registrationForm" action="thongtin.htm" method="post">
+       <tr>
+        <td><label for="hoTen">Họ và tên (*) :</label></td>
+        <td> <input type="text" id="hoTen" name="hoTen" required>
+            <span class="error" id="errorHoTen"></span></td>
+       </tr> 
+       <tr>
+        <td><label for="tenDangNhap">Tên Đăng nhập (*) :</label></td>
+        <td><input type="text" id="tenDangNhap" name="tenDangNhap" required>
+            <span class="error" id="errorTenDangNhap"></span></td>
+       </tr>
+
+       <tr>
+        <td><label for="matKhau">Mật khẩu (*) :</label></td>
+        <td><input type="password" id="matKhau" name="matKhau" required>
+            <span class="error" id="errorMatKhau"></span></td>
+       </tr>
+        
+       <tr>
+        <td><label for="xacNhanMatKhau">Xác nhận mật khẩu (*) :</label></td>
+        <td><input type="password" id="xacNhanMatKhau" name="xacNhanMatKhau" required><br>
+            <span class="error" id="errorXacNhanMatKhau"></span></td>
+       </tr>
+       <tr>
+        <td><label for="ngaySinh">Ngày sinh:</label></td>
+        <td><select id="ngaySinh" name="ngaySinh">
+            <option value="1">1</option>
+            </select>
+        <select id="thangSinh" name="thangSinh">
+            <option value="1">1</option>
+            </select>
+        <select id="namSinh" name="namSinh">
+            <option value="1940">1940</option>
+            </select></td>
+       </tr>
+       <tr>
+        <td><label for="dienThoai">Điện thoại:</label></td>
+        <td><input type="text" id="dienThoai" name="dienThoai">
+            <span class="error" id="errorDienThoai"></span></td>
+       </tr>
+        
+        <tr>
+            <td><label for="diaChi">Địa chỉ:</label></td>
+            <td><input type="text" id="diaChi" name="diaChi"></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email khác:</label></td>
+            <td><input type="email" id="email" name="email">
+                <span class="error" id="errorEmail"></span></td>
+        </tr>
+        <tr>
+            <td><label for="soThich">Sở thích:</label></td>
+            <td><select id="caNhac" name="soThich">
+                <option value="Ca Nhạc">Ca Nhạc</option>
+                <option value="Du Lịch">Du lịch</option>
+                </select>
+                </td>
+        </tr>
+      <tr>
+        <td></td>
+    <td><input type="submit" value="Đăng Ký">
+    <input type="reset" value="Hủy"></td>
+      </tr>
+        
+    </form>
+</table>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        
+        form.addEventListener('submit', function(event) {
+            let isValid = true;
+
+            // Kiểm tra họ tên
+            const hoTen = document.getElementById('hoTen').value;
+            if (hoTen === "") {
+                document.getElementById('errorHoTen').textContent = 'Họ tên không được để trống';
+                isValid = false;
+            } else {
+                document.getElementById('errorHoTen').textContent = '';
+            }
+
+            // Kiểm tra tên đăng nhập
+            const tenDangNhap = document.getElementById('tenDangNhap').value;
+            if (tenDangNhap.length < 6) {
+                document.getElementById('errorTenDangNhap').textContent = 'Tên đăng nhập phải có ít nhất 6 ký tự';
+                isValid = false;
+            } else {
+                document.getElementById('errorTenDangNhap').textContent = '';
+            }
+
+            // Kiểm tra mật khẩu
+            // ... (Tự thêm logic kiểm tra mật khẩu)
+
+            // Kiểm tra xác nhận mật khẩu
+            // ... (Tự thêm logic kiểm tra xác nhận mật khẩu)
+
+            // Kiểm tra số điện thoại
+            const dienThoai = document .getElementById('dienThoai').value;
+            if (dienThoai !== "" && !/^[0-9]+$/.test(dienThoai)) {
+                document.getElementById('errorDienThoai').textContent = 'Số điện thoại chỉ được chứa số';
+                isValid = false;
+            } else {
+                document.getElementById('errorDienThoai').textContent = '';
+            }
+
+            // Kiểm tra email
+            const email = document.getElementById('email').value;
+            if (email !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('errorEmail').textContent = 'Email không đúng định dạng';
+                isValid = false;
+            } else {
+                document.getElementById('errorEmail').textContent = '';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+            
+            const form = document.getElementById('registrationForm');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Ngăn chặn việc gửi form mặc định
+      
+      // Lấy thông tin từ form
+      const hoTen = document.getElementById('hoTen').value;
+      const email = document.getElementById('email').value;
+
+      // Lưu trữ thông tin vào LocalStorage
+      localStorage.setItem('hoTen', hoTen);
+      localStorage.setItem('email', email);
+
+      // Chuyển hướng sang trang thongtin.htm
+      window.location.href = 'thongtin.htm';
+    });
+        });
+    </script>
+</body>
+</html>

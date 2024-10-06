@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>T-SPEED COMPANY</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+  <style>
+    *{
+      margin: auto 0px;
+      padding: auto 0px;
+    }
+    .wapper{
+      width: 960px;
+      margin: auto 0px;
+      padding: auto 0px;
+    }
+    header img{
+      width: 960px;
+      margin-left: 20px;
+    }
+    body {
+      font-family: sans-serif;
+    }
+
+    table {
+      border-collapse: separate ;
+      background-color: rgba(170, 170, 170, 0.816) ;
+      width: 95%;
+      margin: 20px ;
+
+    }
+    th{
+      font-size: 1em;
+    }
+    h2{
+      color: blue;
+      font-size: 1em;
+      text-align: center;
+      font-weight: bold;
+    }
+    td, th {
+      border: 1px solid #fdfdfd;
+      padding: 8px;
+      text-align: center;
+    }
+    th{
+      color: blue;
+    }
+    td{
+      height: 40px;
+    }
+
+    #hinhXe {
+      width: 200px;
+      height: 150px;
+    }
+
+    #carInfo {
+      margin: 20px auto;
+      text-align: center;
+    }
+    #left{
+      width: 30%;
+      float: left;
+    }
+    #right{
+      width: 30%;
+      float: right;
+    }
+    #center{
+      width: 40%;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="wapper">
+
+    <header>
+        <img  src="/img/banner_car.jpg" alt="">
+    </header>
+    <div id="left">
+        
+        <table id="bantin">
+            <tr>
+                <h2><th colspan="2">Bảng tin thị trường</th></h2>
+            </tr>
+            <tr>
+                <th colspan="2" style="color: rgb(54, 144, 255);">Vàng</th>
+            </tr>
+            <tr style="background-color: white;color: rgb(54, 144, 255);">
+                <td>Mua vào</td>
+                <td>Bán ra</td>
+            </tr>
+            <tr style="background-color: white;">
+                <td id="vangMua"></td>
+                <td id="vangBan"></td>
+            </tr>
+            <tr>
+                <th colspan="2" style="color: rgb(54, 144, 255);">USD</th>
+            </tr>
+            <tr style="background-color: white;color: rgb(54, 144, 255);">
+                <td>Mua vào</td>
+                <td>Bán ra</td>
+            </tr>
+            <tr style="background-color: white;">
+                <td id="usdMua"></td>
+                <td id="usdBan"></td>
+            </tr>
+        </table>
+    </div>
+  <div id="center">
+    <form id="carForm">
+        <table>
+            <tr>
+                <h2><th colspan="2"> Cập ngật giá cả thị trường</th></h2>
+            </tr>
+          <tr>
+            <td style="font-weight: bold;">Mua vào:</td>
+            <td><input type="text" id="muaVao" ></td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;">Bán ra:</td>
+            <td><input type="text" id="muaVao" ></td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;">Loại xe:</td>
+            <td>
+              <select id="loaiXe">
+                <option value="../img/car1.jpg,35000">Toyota</option>
+                <option value="../img/car2.jpg,1500">KIA</option>
+                <option value="../img/car3.jpg,40000">Ford</option>
+                <option value="../img/car4.jpg,32000">Civic</option>
+                <option value="../img/car5.jpg,50000">Ferrari</option>
+                <option value="../img/car7.jpg,45000">Mercedes</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td ></td>
+            <td>
+              <input type="radio" id="vang" name="loaiTien" value="1"> Vàng
+              <input type="radio" id="usd" name="loaiTien" value="0"> USD
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="button" id="update">Update</button>
+              <button type="button" id="state" >State</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+  </div>
+  <div id="right">
+    <table>
+      <tr>
+    <th>Bảng báo giá</th>
+      </tr>
+      <tr>
+        <td style="color: rgb(54, 144, 255);background-color: white; text-align: left;">- với kiểu dáng thể thao, sang trọng <br>
+          - nổi bật, ít tốn nhiên liệu <br>
+         - kiểu dáng thể theo</u></p>
+        </td>
+      </tr>
+      <tr>
+        <td> 
+      <div id="carInfo">
+        
+        <img id="hinhXe" src="/img/car1.jpg" alt="Hình xe">
+        </div>
+       </td> 
+       <tr>
+        <td>
+          <div id="giaXe" style="color: rgb(80, 234, 80); background-color: white;">
+        </div></td>
+      </tr>
+    </table>
+    
+    </div>
+  </div>
+
+  </div>
+
+
+  <script>
+    document.getElementById("muaVao").addEventListener("blur", function() {
+      let giaTri = this.value;
+      if (!isNaN(giaTri) && giaTri !== "") {
+        document.getElementById("state").disabled = false;
+      } else {
+        document.getElementById("state").disabled = true;
+      }
+    });
+
+    document.getElementById("loaiXe").addEventListener("change", function() {
+      let thongTinXe = this.value.split(",");
+      document.getElementById("hinhXe").src = thongTinXe[0];
+      document.getElementById("giaXe").innerHTML = "Giá: " + thongTinXe[1];
+    });
+
+    document.getElementById("update").addEventListener("click", function() {
+      let muaVao = document.getElementById("muaVao").value;
+      let banRa = document.getElementById("banRa").value;
+      let loaiTien = document.querySelector('input[name="loaiTien"]:checked').value;
+
+      if (loaiTien === "1") { // Vàng
+        document.getElementById("vangMua").innerHTML = muaVao;
+        document.getElementById("vangBan").innerHTML = banRa;
+      } else { // USD
+        document.getElementById("usdMua").innerHTML = muaVao;
+        document.getElementById("usdBan").innerHTML = banRa;
+      }
+    });
+  </script>
+</body>
+</html>

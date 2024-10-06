@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thông tin người dùng</title>
+</head>
+<body>
+  <h2>Thông tin của bạn</h2>
+  <p>Họ và tên: <span id="hienThiHoTen"></span></p>
+  <p>Email: <span id="hienThiEmail"></span></p>
+
+  <script>
+    // Lấy thông tin từ LocalStorage
+    const hoTen = localStorage.getItem('hoTen');
+    const email = localStorage.getItem('email');
+
+    // Hiển thị thông tin
+    document.getElementById('hienThiHoTen').textContent = hoTen;
+    document.getElementById('hienThiEmail').textContent = email;
+  </script>
+</body>
+</html>
